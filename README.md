@@ -26,15 +26,6 @@ The purpose of this project is to manage user interactions with social media pos
 - **Amazon RDS**
 - **Amazon S3**
 
-## Installation
-To be determined.
-
-## Usage
-To be determined.
-
-## Examples
-To be determined.
-
 ## Acknowledgements
 Special thanks to **TrainingDev**.
 
