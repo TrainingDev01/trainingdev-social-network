@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: Notification Management API
+  description: |
+    This specification is used to manage notifications, including functions such as creating and retrieving all notifications.
+  contact:
+    email: santtiagolozano@gmail.com
+  version: 1.0.11
+servers:
+  - url: https://trainingdev/api/v1
+tags:
+  - name: notification
+    description: Operations about notification
+paths:
+  /notification:
+    post:
+      tags:
+        - notification
+      summary: Create new notification
+      description: Create a new notification
+      operationId: createNotification
+      requestBody:
+        description: Notification object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationRequest'
+      responses:
+        '201':
+          description: Created 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationDetail'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /notification/{receptorUserId}:
+    get:
+      tags:
+        - notification
+      summary: Get all notifications by Receptor user ID
+      description: Retrieve all notifications by Receptor user ID
+      operationId: getAllNotification
+      parameters:
+        - name: receptorUserId
+          in: path
+          description: ID of the receptor user
+          required: true
+          example: 10
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ok 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationDetailList'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  
+components:
+  schemas:
+    NotificationRequest:
+      type: object
+      properties:
+        senderUserId:
+          type: integer
+          example: 10
+          description: User who sends the notification
+        receptorUserId:
+          type: integer
+          example: 30
+          description: User who receives the notification
+        type:
+          type: string
+          enum:
+            - MESSAGE
+            - COMMENT
+            - RELATIONSHIP
+          example: MESSAGE
+          description: Notification type
+        description:
+          type: string
+          example: 'New message'
+          description: Notification description
+      required:
+        - senderUserId
+        - receptorUserId
+        - type
+        - description
+  
+    User:  
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+          description: User ID
+        name:
+          type: string
+          example: Santiago Lozano
+          description: User name
+        profilePhoto:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: User profile image
+          
+    NotificationDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: '100'
+          description: Notification ID
+        senderUser:
+          $ref: '#/components/schemas/User'
+        receptorUser:
+          $ref: '#/components/schemas/User'
+        type:
+          type: string
+          enum:
+            - MESSAGE
+            - COMMENT
+            - RELATIONSHIP
+          example: MESSAGE
+          description: Notification type
+        description:
+          type: string
+          example: 'New message'
+          description: Notification description
+        creationDate:
+          type: string
+          example: '2024-06-29T07:36:39.2252098'
+          description: Notification creation date
+    
+    NotificationDetailList:
+      type: object
+      properties:
+        notificationList: 
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationDetail'
+    
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code
+        message:
+          type: string
+          description: Error description
