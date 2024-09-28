@@ -13,4 +13,5 @@ spring:
 properties:
   messages:
     error:
-      user-does-not-exist: "User does not exist"
+      user-does-not-exist: "User does not exist."
+      user-already-exists: "The user already exists. Please log in."
