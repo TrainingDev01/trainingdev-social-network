@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationRequest {
-    private Integer id;
 
     @NotNull(message = "Sender user ID cannot be null")
     private Integer senderUserId;
@@ -20,9 +19,9 @@ public class NotificationRequest {
     @NotNull(message = "Receptor user ID cannot be null")
     private Integer receptorUserId;
 
-    @NotNull(message = "type cannot be null")
+    @NotNull(message = "Invalid notification type")
     private NotificationTypeEnum type;
 
-    @NotBlank(message = "Description cannot be blank")
+    @NotBlank(message = "Notification description cannot be empty")
     private String description;
 }

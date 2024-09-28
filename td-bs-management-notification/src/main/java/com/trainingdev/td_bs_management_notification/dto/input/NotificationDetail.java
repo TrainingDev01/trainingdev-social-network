@@ -16,16 +16,12 @@ public class NotificationDetail {
 
     private Integer id;
 
-    @NotNull(message = "Sender user ID cannot be null")
     private User senderUser;
 
-    @NotNull(message = "Receptor user ID cannot be null")
     private User receptorUser;
 
-    @NotNull(message = "type cannot be null")
     private NotificationTypeEnum type;
 
-    @NotBlank(message = "Description cannot be blank")
     private String description;
 
     private LocalDateTime creationDate;
