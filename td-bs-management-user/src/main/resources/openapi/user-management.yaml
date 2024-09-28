@@ -1,8 +1,10 @@
+
 openapi: 3.0.3
 info:
   title: User Management API
   description: |
-    This specification is used to manage users, including functions such as creating, reading, and editing users.
+    This API specification defines the endpoints and operations for managing users.
+    It includes functionalities such as creating, reading, and updating user data.
   contact:
     email: santtiagolozano@gmail.com
   version: 1.0.11
@@ -10,147 +12,184 @@ servers:
   - url: https://trainingdev/api/v1
 tags:
   - name: user
-    description: Operations about the user
+    description: Operations related to user management.
 paths:
   /user:
     post:
       tags:
         - user
-      summary: Create user
-      description: This operation allows the creation of unregistered users
+      summary: Create User
+      description: |
+        This operation allows the creation of new users who are not registered yet.
+
+        **Business Rules:**
+        - If the user's email already exists in the database, return the error: "The user already exists. Please log in."
       operationId: createUser
       requestBody:
-        description: User object
+        description: User object that needs to be created.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserRequest'
       responses:
         '201':
-          description: Created 
+          description: User successfully created.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDetail'
         '400':
-          description: Bad request
+          description: Invalid request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userAlreadyExists:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Password cannot be empty."
+        '409':
+          description: Conflict - User already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userAlreadyExists:
+                  summary: User already exists error
+                  value:
+                    code: "409"
+                    message: "The user already exists. Please log in."
         '500':
-          description: Internal server error
+          description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Server Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
     put:
       tags:
         - user
-      summary: Update user
-      description: This operation allows the update of existing users
+      summary: Update User
+      description: |
+        This operation allows the update of existing user information.
+
+        **Business Rules:**
+        - If the user to be modified does not exist in the database, return the error: "User does not exist."
       operationId: updateUser
       requestBody:
-        description: Update an existing user
+        description: User object with updated information.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserDetail'
       responses:
         '200':
-          description: Ok
+          description: User information successfully updated.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDetail'
         '400':
-          description: Bad request
+          description: Invalid request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalidRequest:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Id cannot be null."
         '404':
-          description: Not found
+          description: Not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userNotFound:
+                  summary: User not found error
+                  value:
+                    code: "404"
+                    message: "User does not exist."
         '500':
-          description: Internal server error
+          description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Server Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
   /user/{id}:
     get:
       tags:
         - user
-      summary: Get user by ID
-      description: Get user details by ID.
+      summary: Get User by ID
+      description: |
+        Retrieve detailed information about a user by their unique ID.
+
+        **Business Rules:**
+        - If the user does not exist in the database, return the error: "User does not exist."
       operationId: getUserById
       parameters:
         - name: id
           in: path
-          description: ID of the user to be queried
+          description: The unique identifier of the user to be retrieved.
           required: true
           example: 10
           schema:
             type: integer
       responses:
         '200':
-          description: Ok
+          description: User details retrieved successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserProfile'   
+                $ref: '#/components/schemas/UserProfile'
         '404':
-          description: Not found
+          description: User not found.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                userNotFound:
+                  summary: User not found error
+                  value:
+                    code: "404"
+                    message: "User does not exist."
         '500':
-          description: Internal server error
+          description: Internal server error.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Server Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
 components:
   schemas:
     UserRequest:
       type: object
-      properties:
-        firstName:
-          type: string
-          example: Santiago
-          description: "Maximum 20 characters"
-        lastName:
-          type: string
-          example: Lozano
-          description: "Maximum 20 characters"
-        birthday:
-          type: string
-          example: 2024-06-29
-        email:
-          type: string
-          example: santtiagolozano@gmail.com
-          description: "Maximum 60 characters"
-        password:
-          type: string
-          example: 'Al90@asd'
-          description: |
-            At least one uppercase letter,
-            at least one lowercase letter,
-            at least one number,
-            at least one special character,
-            minimum 8 characters.
-        gender:
-          type: string
-          enum:
-            - MALE
-            - FEMALE
-            - CUSTOM
-          example: MALE
       required:
         - firstName
         - lastName
@@ -158,35 +197,59 @@ components:
         - email
         - password
         - gender
-          
-    UserDetail:
-      type: object
       properties:
         id:
           type: integer
           format: int64
           example: 10
-        name:
+          description: |
+            Unique identifier for the user.
+        firstName:
           type: string
-          example: Santiago Lozano
-          description: "Maximum 40 characters"
+          example: Santiago
+          description: |
+            User's first name. Maximum 20 characters.
+
+            **Business Rule:**
+            - If it is empty, return the error: "First name cannot be empty."
+            - If it exceeds 20 characters, return the error: "First name cannot be longer than 20 characters."
+        lastName:
+          type: string
+          example: Lozano
+          description: |
+            User's last name. Maximum 20 characters.
+
+            **Business Rule:**
+            - If it is empty, return the error: "Last name cannot be empty."
+            - If it exceeds 20 characters, return the error: "Last name cannot be longer than 20 characters."
         birthday:
           type: string
+          format: date
           example: 2024-06-29
-          description: "Birthday in the format aa-mm-dd"
+          description: |
+            User's date of birth in the format YYYY-MM-DD.
+
+            **Business Rule:**
+            - If it is null, return the error: "Birthday cannot be null."
         email:
           type: string
+          format: email
           example: santtiagolozano@gmail.com
-          description: "Maximum 60 characters"
+          description: |
+            User's email address.
+
+            **Business Rule:**
+            - If it is empty, return the error: "Email cannot be empty."
+            - If it is in an incorrect format, return the error: "The email format is incorrect."
         password:
           type: string
           example: 'Al90@asd'
           description: |
-            At least one uppercase letter,
-            at least one lowercase letter,
-            at least one number,
-            at least one special character,
-            minimum 8 characters and maximum 15 characters.
+            The user's password. It must contain at least one uppercase letter,
+            one lowercase letter, one number, one special character, and be between 8 to 15 characters long.
+
+            **Business Rule:**
+            - If it does not meet these criteria, return the error: "Password does not meet the requirements."
         gender:
           type: string
           enum:
@@ -194,77 +257,134 @@ components:
             - FEMALE
             - CUSTOM
           example: MALE
+          description: |
+            The user's gender.
+
+            **Business Rule:**
+            - If it is null, return the error: "Gender cannot be null."
+
+    UserDetail:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: |
+            Unique identifier for the user.
+        name:
+          type: string
+          example: Santiago Lozano
+          description: |
+            User's full name.
+        birthday:
+          type: string
+          example: 2024-06-29
+          description: |
+            User's date of birth in the format YYYY-MM-DD.
+        email:
+          type: string
+          example: santtiagolozano@gmail.com
+          description: |
+            User's email address.
+        password:
+          type: string
+          example: 'Al90@asd'
+          description: |
+            User's email
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - CUSTOM
+          example: MALE
+          description: |
+            The user's gender.
         profilePhoto:
           type: string
           example: 'https://trainingdev-s3/...'
-          description: User profile image
+          description: |
+            URL of the user's profile picture.
         coverPhoto:
           type: string
           example: 'https://trainingdev-s3/...'
-          description: User cover image
+          description: |
+            URL of the user's cover image.
         creationDate:
           type: string
           example: '2024-06-29T10:34:59.5482264'
-          description: User creation date
+          description: |
+            Date and time when the user was created (ISO 8601 format).
         modificationDate:
           type: string
           example: '2024-06-29T10:34:59.5482264'
-          description: User modification date
-      required:
-        - id
-    
+          description: |
+            Date and time when the user was last modified (ISO 8601 format).
+
     UserComment:
       type: object
       properties:
         id:
           type: string
           example: '10'
-          description: "User ID"
-        name: 
+          description: |
+            Unique identifier for the user.
+        name:
           type: string
           example: 'Santiago Lozano'
-          description: "User name"
-        profilePhoto: 
+          description: |
+            User's full name.
+        profilePhoto:
           type: string
           example: 'https://trainingdev-s3/...'
-          description: User profile pic
-    
-    Comment: 
+          description: |
+            URL of the user's profile picture.
+
+    Comment:
       type: object
       properties:
         id:
           type: string
           example: '1'
-          description: "Comment ID"
+          description: |
+            Unique identifier for the comment.
         user:
           $ref: '#/components/schemas/UserComment'
-        description: 
+        description:
           type: string
           example: 'The best'
-          description: "Comment description"
+          description: |
+            Comment text or description.
         creationDate:
           type: string
           example: '2024-06-29T07:36:39.2252098'
-          description: Comment creation date
-    
+          description: |
+            Date and time when the comment was created (ISO 8601 format).
+
     PostDetail:
       type: object
       properties:
         id:
           type: integer
           example: 10
-          description: Post ID
+          description: |
+            Unique identifier for the post.
         userId:
           type: integer
           example: 10
-          description: User ID who made the post
+          description: |
+            Unique identifier for the user who made the post.
         type:
           type: string
           enum:
             - PRIVATE
             - PUBLIC
           example: PUBLIC
-          description: Post type
+          description: |
+            Visibility type of the post.
         feeling:
           type: string
           enum:
@@ -272,30 +392,35 @@ components:
             - LOVELY
             - SAD
           example: HAPPY
-          description: Feeling chosen by the user
+          description: |
+            Feeling chosen by the user for the post.
         description:
           type: string
           example: "Become a Junior Java Developer"
-          description: Post message
+          description: |
+            Content of the post.
         image:
           type: string
           example: 'https://trainingdev-s3/...'
-          description: Post image
+          description: |
+            URL of the image attached to the post.
         creationDate:
           type: string
           example: '2024-06-29T07:36:39'
-          description: Post creation date
+          description: |
+            Date and time when the post was created (ISO 8601 format).
         modificationDate:
           type: string
           example: '2024-06-29T07:36:39'
-          description: Post modification date 
+          description: |
+            Date and time when the post was last modified (ISO 8601 format).
         commentList:
           type: array
           items:
             $ref: '#/components/schemas/Comment'
       required:
         - id
-      
+
     UserProfile:
       type: object
       properties:
@@ -305,13 +430,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PostDetail'
-          
+
     ErrorResponse:
       type: object
       properties:
         code:
           type: string
-          description: Status code
+          description: |
+            Status code of the error.
         message:
           type: string
-          description: Error description
+          description: |
+            Description of the error message.

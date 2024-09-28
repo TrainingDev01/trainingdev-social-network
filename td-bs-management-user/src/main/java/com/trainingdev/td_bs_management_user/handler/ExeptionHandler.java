@@ -1,6 +1,7 @@
 package com.trainingdev.td_bs_management_user.handler;
 
 import com.trainingdev.td_bs_management_user.dto.output.ErrorResponse;
+import com.trainingdev.td_bs_management_user.exception.ConflictException;
 import com.trainingdev.td_bs_management_user.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -25,7 +26,15 @@ public class ExeptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNoNotificationsFoundException(UserNotFoundException ex) {
+    public ErrorResponse handleNotificationsFoundException(UserNotFoundException ex) {
         return new ErrorResponse(ex.getCode(), ex.getMessage());
     }
+
+    @ExceptionHandler(ConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleConflictException(ConflictException ex) {
+        return new ErrorResponse(ex.getCode(), ex.getMessage());
+    }
+
+
 }

@@ -1,0 +1,4 @@
+com\trainingdev\td_bs_management_user\controller\UserControllerTest.class
+com\trainingdev\td_bs_management_user\TdBsManagementUserEntityApplicationTests.class
+com\trainingdev\td_bs_management_user\utils\UtilData.class
+com\trainingdev\td_bs_management_user\service\UserServiceImplTest.class

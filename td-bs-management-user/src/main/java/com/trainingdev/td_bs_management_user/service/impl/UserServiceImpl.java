@@ -4,6 +4,7 @@ import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.entities.UserEntity;
+import com.trainingdev.td_bs_management_user.exception.ConflictException;
 import com.trainingdev.td_bs_management_user.exception.UserNotFoundException;
 import com.trainingdev.td_bs_management_user.mapper.UserMapper;
 import com.trainingdev.td_bs_management_user.repository.UserRepository;
@@ -24,9 +25,14 @@ public class UserServiceImpl implements UserService {
     @Value("${properties.messages.error.user-does-not-exist}")
     private String userDoesntExistError;
 
+    @Value("${properties.messages.error.user-already-exists}")
+    private String userAlreadyExistsError;
 
     @Override
     public UserDetail createUser(UserRequest userRequest) {
+        if (userRepository.existsByEmail(userRequest.getEmail())) {
+            throw new ConflictException(String.valueOf(HttpStatus.CONFLICT.value()), userAlreadyExistsError);
+        }
         UserEntity userEntity = userMapper.userRequestToUserEntity(userRequest);
         UserEntity userEntitySaved = userRepository.save(userEntity);
         return userMapper.userEntityToUserDetail(userEntitySaved);

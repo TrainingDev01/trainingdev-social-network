@@ -1,0 +1,317 @@
+openapi: 3.0.3
+info:
+  title: User Management API
+  description: |
+    This specification is used to manage users, including functions such as creating, reading, and editing users.
+  contact:
+    email: santtiagolozano@gmail.com
+  version: 1.0.11
+servers:
+  - url: https://trainingdev/api/v1
+tags:
+  - name: user
+    description: Operations about the user
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This operation allows the creation of unregistered users
+      operationId: createUser
+      requestBody:
+        description: User object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Created 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - user
+      summary: Update user
+      description: This operation allows the update of existing users
+      operationId: updateUser
+      requestBody:
+        description: Update an existing user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetail'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: Get user by ID
+      description: Get user details by ID.
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user to be queried
+          required: true
+          example: 10
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'   
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    UserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Santiago
+          description: "Maximum 20 characters"
+        lastName:
+          type: string
+          example: Lozano
+          description: "Maximum 20 characters"
+        birthday:
+          type: string
+          example: 2024-06-29
+        email:
+          type: string
+          example: santtiagolozano@gmail.com
+          description: "Maximum 60 characters"
+        password:
+          type: string
+          example: 'Al90@asd'
+          description: |
+            At least one uppercase letter,
+            at least one lowercase letter,
+            at least one number,
+            at least one special character,
+            minimum 8 characters.
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - CUSTOM
+          example: MALE
+      required:
+        - firstName
+        - lastName
+        - birthday
+        - email
+        - password
+        - gender
+          
+    UserDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Santiago Lozano
+          description: "Maximum 40 characters"
+        birthday:
+          type: string
+          example: 2024-06-29
+          description: "Birthday in the format aa-mm-dd"
+        email:
+          type: string
+          example: santtiagolozano@gmail.com
+          description: "Maximum 60 characters"
+        password:
+          type: string
+          example: 'Al90@asd'
+          description: |
+            At least one uppercase letter,
+            at least one lowercase letter,
+            at least one number,
+            at least one special character,
+            minimum 8 characters and maximum 15 characters.
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - CUSTOM
+          example: MALE
+        profilePhoto:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: User profile image
+        coverPhoto:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: User cover image
+        creationDate:
+          type: string
+          example: '2024-06-29T10:34:59.5482264'
+          description: User creation date
+        modificationDate:
+          type: string
+          example: '2024-06-29T10:34:59.5482264'
+          description: User modification date
+      required:
+        - id
+    
+    UserComment:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '10'
+          description: "User ID"
+        name: 
+          type: string
+          example: 'Santiago Lozano'
+          description: "User name"
+        profilePhoto: 
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: User profile pic
+    
+    Comment: 
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+          description: "Comment ID"
+        user:
+          $ref: '#/components/schemas/UserComment'
+        description: 
+          type: string
+          example: 'The best'
+          description: "Comment description"
+        creationDate:
+          type: string
+          example: '2024-06-29T07:36:39.2252098'
+          description: Comment creation date
+    
+    PostDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+          description: Post ID
+        userId:
+          type: integer
+          example: 10
+          description: User ID who made the post
+        type:
+          type: string
+          enum:
+            - PRIVATE
+            - PUBLIC
+          example: PUBLIC
+          description: Post type
+        feeling:
+          type: string
+          enum:
+            - HAPPY
+            - LOVELY
+            - SAD
+          example: HAPPY
+          description: Feeling chosen by the user
+        description:
+          type: string
+          example: "Become a Junior Java Developer"
+          description: Post message
+        image:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: Post image
+        creationDate:
+          type: string
+          example: '2024-06-29T07:36:39'
+          description: Post creation date
+        modificationDate:
+          type: string
+          example: '2024-06-29T07:36:39'
+          description: Post modification date 
+        commentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+      required:
+        - id
+      
+    UserProfile:
+      type: object
+      properties:
+        userDetail:
+          $ref: '#/components/schemas/UserDetail'
+        postList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostDetail'
+          
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code
+        message:
+          type: string
+          description: Error description

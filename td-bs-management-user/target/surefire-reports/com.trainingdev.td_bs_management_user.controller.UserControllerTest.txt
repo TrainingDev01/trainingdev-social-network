@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.trainingdev.td_bs_management_user.controller.UserControllerTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.427 s -- in com.trainingdev.td_bs_management_user.controller.UserControllerTest

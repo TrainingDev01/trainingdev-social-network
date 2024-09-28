@@ -15,29 +15,29 @@ public class UserRequest {
 
     private Integer id;
 
-    @NotEmpty(message = "firstName cannot be empty")
-    @Size(max = 20, message = "firstName cannot be longer than 20 characters")
+    @NotEmpty(message = "First name cannot be empty")
+    @Size(max = 20, message = "First name cannot be longer than 20 characters")
     private String firstName;
 
-    @NotEmpty(message = "lastName cannot be empty")
-    @Size(max = 20, message = "lastName cannot be longer than 20 characters")
+    @NotEmpty(message = "Last name cannot be empty")
+    @Size(max = 20, message = "Last name cannot be longer than 20 characters")
     private String lastName;
 
-    @NotNull(message = "birthday cannot be null")
+    @NotNull(message = "Birthday cannot be null")
     private LocalDate birthday;
 
-    @NotEmpty(message = "email cannot be empty")
-    @Email(message = "The email is wrong")
+    @NotEmpty(message = "Email cannot be empty")
+    @Email(message = "The email format is incorrect")
     private String email;
 
-    @NotEmpty(message = "password cannot be empty")
+    @NotEmpty(message = "Password cannot be empty")
     @Pattern(
-            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "The password must have at least one uppercase letter, at least one lowercase letter, at least one number, at least one special character, minimum 8 characters."
+            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$",
+            message = "Password does not meet the requirements."
     )
     private String password;
 
-    @NotNull(message = "gender cannot be null")
+    @NotNull(message = "Gender cannot be null")
     private GenderEnum gender;
 
 }

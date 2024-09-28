@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d8963b47-5c3d-48a2-a4da-24c40edbc414",
+		"_postman_id": "53de5219-b6de-4b02-ad47-73ab91cb6bb8",
 		"name": "User Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18629535"
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@asd\",\r\n  \"gender\": \"MALE\"\r\n}",
+					"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santiagolozano@gmail.com\",\r\n  \"password\": \"Al90@asd\",\r\n  \"gender\": \"MALE\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -35,58 +35,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "400 Bad Request",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@\",\r\n  \"gender\": \"MALE\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"user"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Transfer-Encoding",
-							"value": "chunked"
-						},
-						{
-							"key": "Date",
-							"value": "Sat, 29 Jun 2024 15:32:16 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "close"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[password: The password must have at least one uppercase letter, at least one lowercase letter, at least one number, at least one special character, minimum 8 characters.]\"\n}"
-				},
 				{
 					"name": "201 OK",
 					"originalRequest": {
@@ -142,6 +90,114 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"id\": 3,\n    \"name\": \"Santiago Lozano\",\n    \"birthday\": \"2000-02-15\",\n    \"email\": \"santtiagolozano@gmail.com\",\n    \"password\": \"Al90@asd\",\n    \"gender\": \"MALE\",\n    \"profilePhoto\": null,\n    \"coverPhoto\": null,\n    \"creationDate\": \"2024-06-29T10:34:59.5482264\",\n    \"modificationDate\": \"2024-06-29T10:34:59.5482264\"\n}"
+				},
+				{
+					"name": "409 Conflict",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@asd\",\r\n  \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Sep 2024 01:11:44 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"409\",\n    \"message\": \"The user already exists. Please log in.\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@\",\r\n  \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Sep 2024 01:12:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[password: Password does not meet the requirements.]\"\n}"
 				}
 			]
 		},
@@ -328,7 +384,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 01 Jul 2024 18:04:48 GMT"
+							"value": "Sat, 28 Sep 2024 01:18:26 GMT"
 						},
 						{
 							"key": "Connection",
@@ -336,12 +392,12 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[id: no debe ser nulo]\"\n}"
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[id: Id cannot be null.]\"\n}"
 				}
 			]
 		},
 		{
-			"name": "Get User By User ID",
+			"name": "Get User By UserId",
 			"request": {
 				"method": "GET",
 				"header": [],

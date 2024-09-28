@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserDetail {
 
-    @NotNull
+    @NotNull(message = "Id cannot be null.")
     private Integer id;
 
     private String name;
