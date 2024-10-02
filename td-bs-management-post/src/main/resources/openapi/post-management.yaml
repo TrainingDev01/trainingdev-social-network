@@ -1,0 +1,534 @@
+openapi: 3.0.3
+info:
+  title: Post Management API
+  description: |
+    This API specification defines the endpoints and operations for managing posts.
+    It includes functionalities such as creating, reading, updating, and deleting posts.
+  contact:
+    email: santtiagolozano@gmail.com
+  version: 1.0.11
+servers:
+  - url: https://trainingdev/api/v1
+tags:
+  - name: post
+    description: Operations related to post management.
+paths:
+  /post:
+    post:
+      tags:
+        - post
+      summary: Create a Post
+      description: |
+        This operation allows the creation of new posts with images or descriptions.
+        
+         **Business Rules:**
+        - If the user is not found, return the error: "User not found."
+      operationId: createPost
+      requestBody:
+        description: Post object containing details for the new post.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostRequest'
+      responses:
+        '201':
+          description: Post successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetail'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                badRequest:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Post description cannot be empty."
+        '404':
+          description: Relationship not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                notFound:
+                  summary: Relationship Not Found
+                  value:
+                    code: "404"
+                    message: "User not found."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
+    put:
+      tags:
+        - post
+      summary: Update a Post
+      description: |
+        This operation allows the update of an existing post.
+        
+        **Business Rules:**
+        - If the post does not exist, return the error: "Post not found."
+        - If the user is not found, return the error: "User not found."
+      operationId: updatePost
+      requestBody:
+        description: Update an existing post.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostModified'
+      responses:
+        '200':
+          description: Post successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetail'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                badRequest:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Post Id cannot be empty."
+        '404':
+          description: Post not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                notFound:
+                  summary: Post Not Found
+                  value:
+                    code: "404"
+                    message: "Post not found."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
+  /post/{postId}:
+    delete:
+      tags:
+        - post
+      summary: Delete a Post
+      description: |
+        This operation deletes a post by its unique identifier.
+        
+         **Business Rules:**
+        - If the post does not exist, return the error: "Post not found."
+      operationId: deletePost
+      parameters:
+        - name: postId
+          in: path
+          description: The unique identifier of the post to be deleted.
+          required: true
+          example: 10
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetail'
+        '400':
+          description: Invalid ID supplied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                badRequest:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Invalid ID."
+        '404':
+          description: Post not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                notFound:
+                  summary: Post Not Found
+                  value:
+                    code: "404"
+                    message: "Post not found."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
+  /post/user/{userId}:
+    get:
+      tags:
+        - post
+      summary: Get All Posts by User ID
+      description: |
+        This operation retrieves all posts created by a specific user.
+        
+        **Business Rules:**
+        - If no posts are found for the user, return the error: "No posts found for the user."
+
+      operationId: getPostByUserId
+      parameters:
+        - name: userId
+          in: path
+          description: The unique identifier of the user to retrieve posts for.
+          required: true
+          example: 10
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Posts successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetailList'
+        '400':
+          description: Invalid ID supplied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                badRequest:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Invalid ID."
+        '404':
+          description: No posts found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                notFound:
+                  summary: No Posts Found
+                  value:
+                    code: "404"
+                    message: "No posts found for the user."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
+  /post/user/{userId}/friend:
+    get:
+      tags:
+        - post
+      summary: Get All Friends' Posts by User ID
+      description: |
+        This operation retrieves all posts created by the user and their friends.
+        
+        **Business Rules:**
+        - If no posts are found for the user and their friends, return the error: "No posts found."
+
+      operationId: getFriendsPostByUserId
+      parameters:
+        - name: userId
+          in: path
+          description: The unique identifier of the user to retrieve posts for.
+          required: true
+          example: 10
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Posts successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetailList'
+        '400':
+          description: Invalid ID supplied.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                badRequest:
+                  summary: Bad Request error
+                  value:
+                    code: "400"
+                    message: "Invalid user ID."
+        '404':
+          description: No posts found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                notFound:
+                  summary: No Posts Found
+                  value:
+                    code: "404"
+                    message: "No posts found."
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                internalError:
+                  summary: Internal Error
+                  value:
+                    code: "500"
+                    message: "An unexpected error occurred. Please try again later."
+
+components:
+  schemas:
+    PostRequest:
+      type: object
+      required:
+        - userId
+        - type
+        - description
+      properties:
+        id:
+          type: integer
+          example: 10
+          description: Post ID.
+        userId:
+          type: integer
+          example: 10
+          description: |
+            Unique identifier for the user who created the post.
+
+            **Business Rules:**
+            - If userId is null, return the error: "User ID cannot be null."
+        type:
+          type: string
+          enum:
+            - PRIVATE
+            - PUBLIC
+          example: PUBLIC
+          description: |
+            The type of post, either PRIVATE or PUBLIC.
+
+            **Business Rules:**
+            - If type is null, return the error: "Post type cannot be null."
+        feeling:
+          type: string
+          enum:
+            - HAPPY
+            - LOVELY
+            - SAD
+          example: HAPPY
+          description: The feeling chosen by the user.
+        description:
+          type: string
+          example: "Become a Junior Java Developer"
+          description: |
+            The content or description of the post.
+
+            **Business Rules:**
+            - If description is null or empty, return the error: "Post description cannot be empty."
+        image:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: Post image URL.
+
+    PostDetail:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          example: 10
+          description: |
+            Post ID.
+            
+            **Business Rules:**
+              - If id is null, return the error: "Post id cannot be null."
+        user:
+          $ref: '#/components/schemas/User'
+        type:
+          type: string
+          enum:
+            - PRIVATE
+            - PUBLIC
+          example: PRIVATE
+          description: The type of post, either PRIVATE or PUBLIC.
+        feeling:
+          type: string
+          enum:
+            - HAPPY
+            - LOVELY
+            - SAD
+          example: HAPPY
+          description: Feeling chosen by the user.
+        description:
+          type: string
+          example: "Become a Junior Java Developer"
+          description: Post message.
+        image:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: Post image URL.
+        creationDate:
+          type: string
+          example: "31/12/2023"
+          description: Creation date in the format day/month/year.
+        modificationDate:
+          type: string
+          example: "31/12/2023"
+          description: Modification date in the format day/month/year.
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: '10'
+          description: User ID
+        name:
+          type: string
+          example: 'Santiago Lozano'
+          description: User name
+        profilePhoto:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: User profile picture
+
+
+    PostModified:
+      type: object
+      required:
+        - id
+        - userId
+        - type
+        - feeling
+        - description
+        - image
+      properties:
+        id:
+          type: integer
+          example: 10
+          description: |
+            Post ID.
+            
+            **Business Rules:**
+              - If id is null, return the error: "Post id cannot be null."
+        userId:
+          type: integer
+          example: 10
+          description: |
+            User ID who made the post.
+            
+            **Business Rules:**
+              - If userId is null, return the error: "Post userId cannot be null."
+        type:
+          type: string
+          enum:
+            - PRIVATE
+            - PUBLIC
+          example: PRIVATE
+          description: |
+            The type of post, either PRIVATE or PUBLIC.
+            
+            **Business Rules:**
+              - If type is null, return the error: "Post type cannot be null."
+        feeling:
+          type: string
+          enum:
+            - HAPPY
+            - LOVELY
+            - SAD
+          example: HAPPY
+          description: |
+            Feeling chosen by the user.
+            
+            **Business Rules:**
+              - If feeling is null, return the error: "Post feeling cannot be null."
+        description:
+          type: string
+          example: "Become a Junior Java Developer"
+          description: |
+            Post message.
+            
+            **Business Rules:**
+              - If description is null, return the error: "Post description cannot be null."
+        image:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: |
+            Post image URL.
+            
+            **Business Rules:**
+              - If image is null, return the error: "Post image cannot be null."
+    
+    
+    
+
+    PostDetailList:
+      type: object
+      required:
+        - postList
+      properties:
+        postList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostDetail'
+          description: List of posts for a specific user.
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code.
+        message:
+          type: string
+          description: Error description.

@@ -1,0 +1,957 @@
+{
+	"info": {
+		"_postman_id": "2726e9dd-1787-4f1a-bd47-588656cd482d",
+		"name": "TrainingDev Post Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18629535"
+	},
+	"item": [
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 100,\r\n  \"type\": \"PUBLIC\",\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Excited to become a Java Developer!\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"post"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "404 user not found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 1,\r\n  \"type\": \"PUBLIC\",\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Excited to become a Java Developer!\",\r\n  \"image\": \"https://trainingdev-s3/image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 02:14:31 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"The user was not found.\"\n}"
+				},
+				{
+					"name": "201 Created",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 100,\r\n  \"type\": \"PUBLIC\",\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Excited to become a Java Developer!\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:31:25 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"user\": {\n        \"id\": \"100\",\n        \"name\": \"Santiago Lozano\",\n        \"profilePhoto\": \"profile_photo.png\"\n    },\n    \"type\": \"PUBLIC\",\n    \"feeling\": \"HAPPY\",\n    \"description\": \"Excited to become a Java Developer!\",\n    \"image\": null,\n    \"creationDate\": \"30/09/2024\",\n    \"modificationDate\": \"30/09/2024\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": 100,\r\n  \"type\": null,\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Excited to become a Java Developer!\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:32:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[type: Post type cannot be null.]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 100,\r\n  \"userId\": 100,\r\n  \"type\": \"PRIVATE\",\r\n  \"feeling\": null,\r\n  \"description\": \"Not feeling so great today.\",\r\n  \"image\": \"https://trainingdev-s3/updated-image.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"post"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Updated",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"userId\": 100,\r\n  \"type\": \"PRIVATE\",\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Not feeling so great today.\",\r\n  \"image\": \"https://trainingdev-s3/updated-image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:39:54 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 100,\n    \"user\": {\n        \"id\": \"100\",\n        \"name\": \"Santiago Lozano\",\n        \"profilePhoto\": \"profile_photo.png\"\n    },\n    \"type\": \"PRIVATE\",\n    \"feeling\": \"HAPPY\",\n    \"description\": \"Not feeling so great today.\",\n    \"image\": \"https://trainingdev-s3/updated-image.jpg\",\n    \"creationDate\": \"29/06/2024\",\n    \"modificationDate\": \"30/09/2024\"\n}"
+				},
+				{
+					"name": "404 Post Not Found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 30,\r\n  \"userId\": 100,\r\n  \"type\": \"PRIVATE\",\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Not feeling so great today.\",\r\n  \"image\": \"https://trainingdev-s3/updated-image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:43:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"The post was not found.\"\n}"
+				},
+				{
+					"name": "404 User not found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"userId\": 30,\r\n  \"type\": \"PRIVATE\",\r\n  \"feeling\": \"HAPPY\",\r\n  \"description\": \"Not feeling so great today.\",\r\n  \"image\": \"https://trainingdev-s3/updated-image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:43:52 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"The user was not found.\"\n}"
+				},
+				{
+					"name": "400 Bad request",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"userId\": 30,\r\n  \"type\": \"PRIVATE\",\r\n  \"feeling\": null,\r\n  \"description\": \"Not feeling so great today.\",\r\n  \"image\": \"https://trainingdev-s3/updated-image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:44:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[feeling: Post feeling cannot be null.]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/post/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"post",
+						"100"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"100"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:45:58 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 100,\n    \"user\": {\n        \"id\": \"100\",\n        \"name\": \"Santiago Lozano\",\n        \"profilePhoto\": \"profile_photo.png\"\n    },\n    \"type\": \"PRIVATE\",\n    \"feeling\": \"HAPPY\",\n    \"description\": \"Not feeling so great today.\",\n    \"image\": \"https://trainingdev-s3/updated-image.jpg\",\n    \"creationDate\": \"29/06/2024\",\n    \"modificationDate\": \"29/06/2024\"\n}"
+				},
+				{
+					"name": "404 Not found",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/80",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"80"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:46:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"The post was not found.\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/sd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"sd"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 04:44:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"Invalid ID.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get posts by user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/post/user/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"post",
+						"user",
+						"100"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "404 User Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/user/50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"user",
+								"50"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:54:29 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"The user was not found.\"\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/user/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"user",
+								"100"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 03:54:43 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"postList\": [\n        {\n            \"id\": 100,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": \"HAPPY\",\n            \"description\": \"This is the first post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 200,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": \"HAPPY\",\n            \"description\": \"This is the second post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 300,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the third post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 400,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fourth post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 500,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fifth post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/user/3e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"user",
+								"3e"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 04:44:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"Invalid ID.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Posts By Friends",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/post/user/100/friend",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"post",
+						"user",
+						"100",
+						"friend"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/user/100/friend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"user",
+								"100",
+								"friend"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 04:37:27 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"postList\": [\n        {\n            \"id\": 500,\n            \"user\": {\n                \"id\": \"200\",\n                \"name\": \"Omar Perez\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fifth post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 600,\n            \"user\": {\n                \"id\": \"200\",\n                \"name\": \"Omar Perez\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fifth post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 700,\n            \"user\": {\n                \"id\": \"200\",\n                \"name\": \"Omar Perez\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fifth post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 100,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": \"HAPPY\",\n            \"description\": \"This is the first post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 200,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": \"HAPPY\",\n            \"description\": \"This is the second post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 300,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the third post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        },\n        {\n            \"id\": 400,\n            \"user\": {\n                \"id\": \"100\",\n                \"name\": \"Santiago Lozano\",\n                \"profilePhoto\": \"profile_photo.png\"\n            },\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fourth post\",\n            \"image\": null,\n            \"creationDate\": \"29/06/2024\",\n            \"modificationDate\": \"29/06/2024\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/user/1r/friend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"user",
+								"1r",
+								"friend"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 04:44:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"Invalid ID.\"\n}"
+				},
+				{
+					"name": "404 Posts Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/post/user/100/friend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"user",
+								"100",
+								"friend"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 01 Oct 2024 04:45:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"No posts found.\"\n}"
+				}
+			]
+		}
+	]
+}

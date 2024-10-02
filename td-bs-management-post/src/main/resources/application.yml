@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console.enabled: true
+
+properties:
+  messages:
+    error:
+      user-already-exists: "The user already exists. Please log in."
+      post-not-found: "The post was not found."
+      no-posts-found: "No posts found."
+      user-not-found: "The user was not found."
+      invalid-post-id: "Invalid ID."
+      internal-error: "An unexpected error occurred. Please try again later."
+
