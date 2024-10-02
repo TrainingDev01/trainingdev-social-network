@@ -2,6 +2,7 @@ package com.trainingdev.td_bs_management_user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
+import com.trainingdev.td_bs_management_user.dto.input.UserModified;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.exception.UserNotFoundException;
@@ -68,13 +69,14 @@ class UserControllerTest {
 
     @Test
     public void updateUser_when_return_200() throws Exception {
+        UserModified userModified = UtilData.createUserModified();
         UserDetail userDetail = UtilData.createUserDetail();
 
-        when(userService.updateUser(any(UserDetail.class))).thenReturn(userDetail);
+        when(userService.updateUser(any(UserModified.class))).thenReturn(userDetail);
 
         mockMvc.perform(put("/api/v1/user")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userDetail)))
+                        .content(objectMapper.writeValueAsString(userModified)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name").value(userDetail.getName()))
@@ -95,15 +97,15 @@ class UserControllerTest {
 
     @Test
     public void updateUser_when_return_404() throws Exception {
-        UserDetail userDetail = UtilData.createUserDetail();
+        UserModified userModified = UtilData.createUserModified();
 
-        when(userService.updateUser(any(UserDetail.class)))
+        when(userService.updateUser(any(UserModified.class)))
                 .thenThrow(new UserNotFoundException(String.valueOf(HttpStatus.NOT_FOUND.value()),
                         userDoesNotExistError));
 
         mockMvc.perform(put("/api/v1/user")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userDetail)))
+                        .content(objectMapper.writeValueAsString(userModified)))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.code").value(String.valueOf(HttpStatus.NOT_FOUND.value())))

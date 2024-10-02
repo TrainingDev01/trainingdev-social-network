@@ -1,6 +1,7 @@
 package com.trainingdev.td_bs_management_user.controller;
 
 import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
+import com.trainingdev.td_bs_management_user.dto.input.UserModified;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.service.UserService;
@@ -24,8 +25,8 @@ public class UserController {
 
     @PutMapping("/user")
     @ResponseStatus(HttpStatus.OK)
-    public UserDetail updateUser(@RequestBody @Valid UserDetail userDetail) {
-        return userService.updateUser(userDetail);
+    public UserDetail updateUser(@RequestBody @Valid UserModified userModified) {
+        return userService.updateUser(userModified);
     }
 
     @GetMapping("/user/{id}")

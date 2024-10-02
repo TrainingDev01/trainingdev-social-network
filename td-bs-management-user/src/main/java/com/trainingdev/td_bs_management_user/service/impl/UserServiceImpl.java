@@ -1,6 +1,7 @@
 package com.trainingdev.td_bs_management_user.service.impl;
 
 import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
+import com.trainingdev.td_bs_management_user.dto.input.UserModified;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.entities.UserEntity;
@@ -39,10 +40,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetail updateUser(UserDetail userDetail) {
-        userRepository.findById(userDetail.getId())
+    public UserDetail updateUser(UserModified userModified) {
+        userRepository.findById(userModified.getId())
                 .orElseThrow(() -> new UserNotFoundException(String.valueOf(HttpStatus.NOT_FOUND.value()), userDoesntExistError));
-        UserEntity userEntityUpdated = userRepository.save(userMapper.userDetailToUserEntity(userDetail));
+        UserEntity userEntityUpdated = userRepository.save(userMapper.userDetailToUserEntity(userModified));
         return userMapper.userEntityToUserDetail(userEntityUpdated);
     }
 

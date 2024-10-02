@@ -90,7 +90,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserDetail'
+              $ref: '#/components/schemas/UserModified'
       responses:
         '200':
           description: User information successfully updated.
@@ -323,6 +323,89 @@ components:
           example: '2024-06-29T10:34:59.5482264'
           description: |
             Date and time when the user was last modified (ISO 8601 format).
+
+    UserModified:
+      type: object
+      required:
+        - id
+        - name
+        - birthday
+        - email
+        - password
+        - gender
+        - profilePhoto
+        - coverPhoto
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: |
+            Unique identifier for the user.
+            
+            **Business Rule:**
+            - If id is null, return the error: "Id cannot be null."
+        name:
+          type: string
+          example: Santiago Lozano
+          description: |
+            User's full name.
+            
+             **Business Rule:**
+            - If name is null, return the error: "Name cannot be null."
+        birthday:
+          type: string
+          example: 2024-06-29
+          description: |
+            User's date of birth in the format YYYY-MM-DD.
+            
+             **Business Rule:**
+            - If birthday is null, return the error: "Birthday cannot be null."
+        email:
+          type: string
+          example: santtiagolozano@gmail.com
+          description: |
+            User's email address.
+            
+            **Business Rule:**
+            - If email is null, return the error: "Email cannot be null."
+        password:
+          type: string
+          example: 'Al90@asd'
+          description: |
+            User's email
+            
+            **Business Rule:**
+            - If password is null, return the error: "Password cannot be null."
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - CUSTOM
+          example: MALE
+          description: |
+            The user's gender.
+            
+            **Business Rule:**
+            - If gender is null, return the error: "Gender cannot be null."
+        profilePhoto:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: |
+            URL of the user's profile picture.
+            
+            **Business Rule:**
+            - If profilePhoto is null, return the error: "ProfilePhoto cannot be null."
+        coverPhoto:
+          type: string
+          example: 'https://trainingdev-s3/...'
+          description: |
+            URL of the user's cover image.
+            
+             **Business Rule:**
+            - If coverPhoto is null, return the error: "CoverPhoto cannot be null."
+
 
     UserComment:
       type: object

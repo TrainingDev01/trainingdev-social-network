@@ -1,6 +1,7 @@
 package com.trainingdev.td_bs_management_user.service;
 
 import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
+import com.trainingdev.td_bs_management_user.dto.input.UserModified;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.entities.UserEntity;
@@ -56,29 +57,29 @@ class UserServiceImplTest {
 
     @Test
     public void updateUser_when_return_success() {
-        UserDetail userDetail = UtilData.createUserDetail();
+        UserModified userModified = UtilData.createUserModified();
         UserEntity userEntity = UtilData.createUserEntity();
         UserEntity userEntityUpdated = UtilData.createUserEntity();
         UserDetail userDetailUpdated = UtilData.createUserDetail();
 
-        when(userRepository.findById(userDetail.getId())).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userModified.getId())).thenReturn(Optional.of(userEntity));
         when(userRepository.save(any(UserEntity.class))).thenReturn(userEntityUpdated);
-        when(userMapper.userDetailToUserEntity(userDetail)).thenReturn(userEntity);
+        when(userMapper.userDetailToUserEntity(userModified)).thenReturn(userEntity);
         when(userMapper.userEntityToUserDetail(userEntityUpdated)).thenReturn(userDetailUpdated);
 
-        UserDetail result = userServiceImpl.updateUser(userDetail);
+        UserDetail result = userServiceImpl.updateUser(userModified);
         assertEquals(userDetailUpdated, result);
     }
 
 
     @Test
     public void updateUserNotFound_when_return_not_found() {
-        UserDetail userDetail = UtilData.createUserDetail();
+        UserModified userModified = UtilData.createUserModified();
 
-        when(userRepository.findById(userDetail.getId())).thenReturn(Optional.empty());
+        when(userRepository.findById(userModified.getId())).thenReturn(Optional.empty());
 
         UserNotFoundException exception = assertThrows(UserNotFoundException.class, () -> {
-            userServiceImpl.updateUser(userDetail);
+            userServiceImpl.updateUser(userModified);
         });
 
         assertEquals(String.valueOf(HttpStatus.NOT_FOUND.value()), exception.getCode());

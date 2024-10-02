@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "53de5219-b6de-4b02-ad47-73ab91cb6bb8",
+		"name": "TrainingDev User Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18629535"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santiagolozano@gmail.com\",\r\n  \"password\": \"Al90@asd\",\r\n  \"gender\": \"MALE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "201 OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@asd\",\r\n  \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 29 Jun 2024 15:34:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"name\": \"Santiago Lozano\",\n    \"birthday\": \"2000-02-15\",\n    \"email\": \"santtiagolozano@gmail.com\",\n    \"password\": \"Al90@asd\",\n    \"gender\": \"MALE\",\n    \"profilePhoto\": null,\n    \"coverPhoto\": null,\n    \"creationDate\": \"2024-06-29T10:34:59.5482264\",\n    \"modificationDate\": \"2024-06-29T10:34:59.5482264\"\n}"
+				},
+				{
+					"name": "409 Conflict",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@asd\",\r\n  \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Sep 2024 01:11:44 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"409\",\n    \"message\": \"The user already exists. Please log in.\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Santiago\",\r\n  \"lastName\": \"Lozano\",\r\n  \"birthday\": \"2000-02-15\",\r\n  \"email\": \"santtiagolozano@gmail.com\",\r\n  \"password\": \"Al90@\",\r\n  \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Sep 2024 01:12:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[password: Password does not meet the requirements.]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 100,\r\n    \"name\": \"Santiago Lozano\",\r\n    \"birthday\": \"2000-02-15\",\r\n    \"email\": \"santtiagolozanomurcia@gmail.com\",\r\n    \"password\": \"Al90@asd\",\r\n    \"gender\": \"MALE\",\r\n    \"profilePhoto\": \"photo.jpg\",\r\n    \"coverPhoto\": \"photo.jpg\",\r\n    \"creationDate\": \"2024-03-29T10:34:59.5482264\",\r\n    \"modificationDate\": \"2024-03-29T10:34:59.5482264\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "404 Not Found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"name\": \"Santiago Lozano\",\r\n    \"birthday\": \"2000-02-15\",\r\n    \"email\": \"santtiagolozano@gmail.com\",\r\n    \"password\": \"Al90@asd\",\r\n    \"gender\": \"MALE\",\r\n    \"profilePhoto\": null,\r\n    \"coverPhoto\": null,\r\n    \"creationDate\": \"2024-06-29T10:34:59.5482264\",\r\n    \"modificationDate\": \"2024-06-29T10:34:59.5482264\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Jun 2024 23:37:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"User does not exist\"\n}"
+				},
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //\"id\": 1,\r\n    \"name\": \"Santiago Lozano  Murcia\",\r\n    \"birthday\": \"2000-02-15\",\r\n    \"email\": \"santtiagolozanomurcia@gmail.com\",\r\n    \"password\": \"Al90@asd\",\r\n    \"gender\": \"MALE\",\r\n    \"profilePhoto\": null,\r\n    \"coverPhoto\": null,\r\n    \"creationDate\": \"2024-03-29T10:34:59.5482264\",\r\n    \"modificationDate\": \"2024-03-29T10:34:59.5482264\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 28 Sep 2024 01:18:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"400\",\n    \"message\": \"[id: Id cannot be null.]\"\n}"
+				},
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100,\r\n    \"name\": \"Santiago Lozano\",\r\n    \"birthday\": \"2000-02-15\",\r\n    \"email\": \"santtiagolozanomurcia@gmail.com\",\r\n    \"password\": \"Al90@asd\",\r\n    \"gender\": \"MALE\",\r\n    \"profilePhoto\": \"photo.jpg\",\r\n    \"coverPhoto\": \"photo.jpg\",\r\n    \"creationDate\": \"2024-03-29T10:34:59.5482264\",\r\n    \"modificationDate\": \"2024-03-29T10:34:59.5482264\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 02 Oct 2024 02:40:02 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 100,\n    \"name\": \"Santiago Lozano\",\n    \"birthday\": \"2000-02-15\",\n    \"email\": \"santtiagolozanomurcia@gmail.com\",\n    \"password\": \"Al90@asd\",\n    \"gender\": \"MALE\",\n    \"profilePhoto\": \"photo.jpg\",\n    \"coverPhoto\": \"photo.jpg\",\n    \"creationDate\": null,\n    \"modificationDate\": \"2024-10-01T21:39:55.5972086\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get User By UserId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"100"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Jun 2024 23:32:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"userDetail\": {\n        \"id\": 100,\n        \"name\": \"Santiago Lozano\",\n        \"birthday\": \"2000-02-15\",\n        \"email\": \"santtiagolozano@gmail.com\",\n        \"password\": \"password123\",\n        \"gender\": \"MALE\",\n        \"profilePhoto\": \"profile_photo.png\",\n        \"coverPhoto\": \"cover_photo.png\",\n        \"creationDate\": \"2024-06-29T00:00:00\",\n        \"modificationDate\": \"2024-06-29T00:00:00\"\n    },\n    \"postList\": [\n        {\n            \"id\": 1,\n            \"userId\": 100,\n            \"type\": \"PUBLIC\",\n            \"feeling\": \"HAPPY\",\n            \"description\": \"This is the first post\",\n            \"image\": null,\n            \"creationDate\": \"2024-06-29T00:00:00\",\n            \"modificationDate\": \"2024-06-29T00:00:00\",\n            \"commentList\": [\n                {\n                    \"id\": \"1\",\n                    \"user\": {\n                        \"id\": \"100\",\n                        \"name\": \"Santiago Lozano\",\n                        \"profilePhoto\": \"profile_photo.png\"\n                    },\n                    \"description\": \"This is a comment for post 1 by user 100\",\n                    \"creationDate\": \"2024-06-29T00:00:00\"\n                },\n                {\n                    \"id\": \"2\",\n                    \"user\": {\n                        \"id\": \"100\",\n                        \"name\": \"Santiago Lozano\",\n                        \"profilePhoto\": \"profile_photo.png\"\n                    },\n                    \"description\": \"This is a comment for post 1 by user 100\",\n                    \"creationDate\": \"2024-06-29T00:00:00\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"userId\": 100,\n            \"type\": \"PUBLIC\",\n            \"feeling\": \"HAPPY\",\n            \"description\": \"This is the second post\",\n            \"image\": null,\n            \"creationDate\": \"2024-06-29T00:00:00\",\n            \"modificationDate\": \"2024-06-29T00:00:00\",\n            \"commentList\": [\n                {\n                    \"id\": \"3\",\n                    \"user\": {\n                        \"id\": \"100\",\n                        \"name\": \"Santiago Lozano\",\n                        \"profilePhoto\": \"profile_photo.png\"\n                    },\n                    \"description\": \"This is a comment for post 2 by user 100\",\n                    \"creationDate\": \"2024-06-29T00:00:00\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"userId\": 100,\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the third post\",\n            \"image\": null,\n            \"creationDate\": \"2024-06-29T00:00:00\",\n            \"modificationDate\": \"2024-06-29T00:00:00\",\n            \"commentList\": []\n        },\n        {\n            \"id\": 4,\n            \"userId\": 100,\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fourth post\",\n            \"image\": null,\n            \"creationDate\": \"2024-06-29T00:00:00\",\n            \"modificationDate\": \"2024-06-29T00:00:00\",\n            \"commentList\": []\n        },\n        {\n            \"id\": 5,\n            \"userId\": 100,\n            \"type\": \"PUBLIC\",\n            \"feeling\": null,\n            \"description\": \"This is the fifth post\",\n            \"image\": null,\n            \"creationDate\": \"2024-06-29T00:00:00\",\n            \"modificationDate\": \"2024-06-29T00:00:00\",\n            \"commentList\": []\n        }\n    ]\n}"
+				},
+				{
+					"name": "404 Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"10"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Jun 2024 23:36:28 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"404\",\n    \"message\": \"User does not exist\"\n}"
+				}
+			]
+		}
+	]
+}

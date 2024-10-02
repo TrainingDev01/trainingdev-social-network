@@ -3,6 +3,7 @@ package com.trainingdev.td_bs_management_user.mapper;
 import com.trainingdev.td_bs_management_user.dto.business.Comment;
 import com.trainingdev.td_bs_management_user.dto.business.PostDetail;
 import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
+import com.trainingdev.td_bs_management_user.dto.input.UserModified;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.entities.CommentEntity;
@@ -19,7 +20,7 @@ public interface UserMapper {
 
     UserDetail userEntityToUserDetail(UserEntity userEntity);
 
-    UserEntity userDetailToUserEntity(UserDetail userDetail);
+    UserEntity userDetailToUserEntity(UserModified userModified);
 
     @Mapping(source = "posts", target = "postList")
     @Mapping(source = "id", target = "userDetail.id")

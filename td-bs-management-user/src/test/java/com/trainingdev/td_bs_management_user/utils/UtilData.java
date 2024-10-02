@@ -2,6 +2,7 @@ package com.trainingdev.td_bs_management_user.utils;
 
 import com.trainingdev.td_bs_management_user.dto.business.PostDetail;
 import com.trainingdev.td_bs_management_user.dto.input.UserDetail;
+import com.trainingdev.td_bs_management_user.dto.input.UserModified;
 import com.trainingdev.td_bs_management_user.dto.input.UserRequest;
 import com.trainingdev.td_bs_management_user.dto.output.UserProfile;
 import com.trainingdev.td_bs_management_user.entities.UserEntity;
@@ -32,6 +33,19 @@ public class UtilData {
         userDetail.setPassword("Al90@asd");
         userDetail.setGender(GenderEnum.MALE);
         return userDetail;
+    }
+
+    public static UserModified createUserModified() {
+        UserModified userModified = new UserModified();
+        userModified.setId(1);
+        userModified.setName("Santiago Lozano");
+        userModified.setBirthday(LocalDate.now());
+        userModified.setEmail("santtiagolozano@gmail.com");
+        userModified.setPassword("Al90@asd");
+        userModified.setGender(GenderEnum.MALE);
+        userModified.setProfilePhoto("photo.jpg");
+        userModified.setCoverPhoto("coverPhoto.jpg");
+        return userModified;
     }
 
     public static UserEntity createUserEntity() {
